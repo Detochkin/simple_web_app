@@ -1,5 +1,6 @@
 package com.detochkin.portfolio.controllers;
 
+import com.detochkin.portfolio.domain.Role;
 import com.detochkin.portfolio.domain.User;
 import com.detochkin.portfolio.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +21,16 @@ public class SignUpController {
         return "signup";
     }
 
-    @PostMapping
+    @PostMapping("/signup")
     public String addUser(User user, Map<String, Object> model){
-        User userFromDb = userRepository.findByUsername(user.getName);
+        User userFromDb = userRepository.findByUsername(user.getUsername());
         if (userFromDb != null){
             model.put("message", "Такой пользователь уже есть");//сделать репо для месседжей
             return ("signup");
         }
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
-
+        userRepository.save(user);
 
         return "redirect:/login";
     }
