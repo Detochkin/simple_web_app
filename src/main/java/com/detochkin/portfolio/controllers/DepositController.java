@@ -27,7 +27,7 @@ public class DepositController {
         model.addAttribute("deposit_header", "Пополнения счёта:");
         Iterable<DepositEntity> depositEntities = depositRepository.findAll();
         model.addAttribute("deposits", depositEntities);
-        for (var depo: depositEntities)
+        for (DepositEntity depo: depositEntities)
         {
             total += depo.getDepositSum();
         }
