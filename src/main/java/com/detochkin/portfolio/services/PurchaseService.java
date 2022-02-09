@@ -31,7 +31,7 @@ public class PurchaseService {
     }*/
 
     public void saveAll(List<PurchaseEntity> purchaseEntityList) {
-        for (var purchaseEntity: purchaseEntityList) {
+        for (PurchaseEntity purchaseEntity: purchaseEntityList) {
             purchaseRepository.save(purchaseEntity);
         }
     }
