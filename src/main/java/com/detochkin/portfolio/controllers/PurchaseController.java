@@ -55,7 +55,7 @@ public class PurchaseController {
     String purchaseUpdate(@PathVariable(value = "id") Long id, @RequestParam String ticker,
                           @RequestParam Double price, @RequestParam int quantity,
                           @RequestParam String purchase_date, Model model) {
-        PurchaseEntity purchaseEntity = purchaseRepository.findById(id).orElseThrow();
+        PurchaseEntity purchaseEntity = purchaseRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
         purchaseEntity.setTicker(ticker);
         purchaseEntity.setPurchasePrice(price);
         purchaseEntity.setQuantity(quantity);
