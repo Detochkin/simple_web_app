@@ -73,7 +73,7 @@ public class DepositController {
 
     @PostMapping("/deposits/{id}/remove")
     String depositRemove(@PathVariable(value = "id") Long id, Model model) {
-        DepositEntity depositEntity = depositRepository.findById(id).orElseThrow();
+        DepositEntity depositEntity = depositRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
         depositRepository.delete(depositEntity);
         return "redirect:/deposits";
     }
