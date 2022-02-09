@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Controller
@@ -65,7 +66,7 @@ public class PurchaseController {
 
     @PostMapping("/purchases/{id}/remove")
     String purchaseRemove(@PathVariable(value = "id") Long id, Model model) {
-        PurchaseEntity purchaseEntity = purchaseRepository.findById(id).orElseThrow();
+        PurchaseEntity purchaseEntity = purchaseRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
         purchaseRepository.delete(purchaseEntity);
         return "redirect:/purchases";
     }

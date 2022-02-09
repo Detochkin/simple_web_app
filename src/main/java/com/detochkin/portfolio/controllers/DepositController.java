@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Controller
@@ -62,7 +63,7 @@ public class DepositController {
                          @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date depositDate,
                           @RequestParam Double depositSum, @RequestParam String source,
                             Model model) {
-        DepositEntity depositEntity = depositRepository.findById(id).orElseThrow();
+        DepositEntity depositEntity = depositRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
         depositEntity.setDepositDate(depositDate);
         depositEntity.setDepositSum(depositSum);
         depositEntity.setSource(source);
